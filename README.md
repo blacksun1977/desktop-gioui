@@ -1,4 +1,4 @@
-# Gioui-Desktop
+# Desktop-Gioui
 
 * desktop application components which use gioui
 * Go to [gioui.org](https://gioui.org).
