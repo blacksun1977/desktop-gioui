@@ -30,13 +30,12 @@ func NewWindow() Window {
 }
 
 type mWindow struct {
-	gw         *app.Window
-	gt         *material.Theme
-	fullScreen bool
-	title      string
-	size       *image.Point
-	mode       app.WindowMode
-	onResize   func(m Window, from, to *image.Point)
+	gw       *app.Window
+	gt       *material.Theme
+	title    string
+	size     *image.Point
+	mode     app.WindowMode
+	onResize func(m Window, from, to *image.Point)
 }
 
 func (m *mWindow) OnResize(onResize func(w Window, from, to *image.Point)) {
@@ -132,7 +131,6 @@ func (m *mWindow) run() {
 				//router.Layout(gtx, th)
 				e.Frame(gtx.Ops)
 			case app.ConfigEvent:
-				m.mode = e.Config.Mode
 				if m.onResize != nil {
 					from := m.GetSize()
 					to := e.Config.Size
@@ -140,6 +138,7 @@ func (m *mWindow) run() {
 						m.onResize(m, from, &to)
 					}
 				}
+				m.mode = e.Config.Mode
 				*m.size = e.Config.Size
 				//	fmt.Println("app.ConfigEvent", e.Config.Mode, e)
 				//case app.ViewEvent:
